@@ -1,0 +1,77 @@
+/* Background similar to your screenshot: very soft, bright, slightly bluish gradient */
+.auth-bg{
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 700px at 15% 25%, rgba(220, 235, 255, .9), rgba(255,255,255,0) 60%),
+    radial-gradient(900px 600px at 85% 35%, rgba(255, 230, 245, .8), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #f6f8fb, #ffffff);
+}
+
+.auth-wrap{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2.5rem 1rem;
+}
+
+/* Center card like Microsoft sign-in */
+.auth-card{
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 8px;
+  padding: 28px 28px 24px;
+}
+
+/* Simple brand row */
+.brand-dot{
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+}
+.brand-title{
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+/* Social buttons */
+.social-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: .55rem .75rem;
+}
+.social-icon{
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(0,0,0,.06);
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+/* Divider "or" */
+.divider{
+  position: relative;
+  text-align: center;
+}
+.divider::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:50%;
+  height:1px;
+  background: rgba(0,0,0,.12);
+}
+.divider > span{
+  position: relative;
+  background: #fff;
+  padding: 0 .6rem;
+  color: rgba(0,0,0,.55);
+  font-size: .9rem;
+}

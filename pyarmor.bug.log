@@ -1,0 +1,12 @@
+[BUG]: no found input "-w"
+
+## Command Line
+/media/Drive/Visual Studio Code/Visual Studio 2/YouTube Clone/Python Backend/venv/bin/pyarmor gen --pack onefile WebApp.py -- -w --add-data templates:templates
+
+## Environments
+Python 3.13.5
+Pyarmor 9.2.5 (trial), 000000, non-profits
+Platform linux.x86_64
+Native linux.x86_64
+Home /home/vlovmalware/.pyarmor
+

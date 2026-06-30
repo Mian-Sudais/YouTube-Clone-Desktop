@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credentials Reminder</title>
+  <style>
+    :root{
+      --card-bg: rgba(255, 255, 255, 0.14);
+      --card-border: rgba(255, 255, 255, 0.28);
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding: 24px;
+
+      /* animated gradient background */
+      background: linear-gradient(-45deg, #ff2d95, #7c3aed, #06b6d4, #22c55e);
+      background-size: 400% 400%;
+      animation: bgShift 14s ease infinite; /* same idea as popular pure CSS gradient bg [web:12] */
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+    }
+
+    @keyframes bgShift{
+      0%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position: 0% 50%; }
+    }
+
+    .wrap{
+      width: min(880px, 100%);
+    }
+
+    .card{
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 28px;
+      overflow: hidden;
+      position: relative;
+
+      animation: cardIn .55s ease-out both;
+    }
+
+    @keyframes cardIn{
+      from { opacity: 0; transform: translateY(16px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.2rem);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    /* animated gradient text (background-clip + animated background-position) [web:9] */
+    .shine{
+      background: linear-gradient(90deg, #fff, #ffe4f3, #b8fff2, #fff);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShine 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes textShine{
+      from { background-position: 0% 50%; }
+      to   { background-position: 100% 50%; }
+    }
+
+    p{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 70ch;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.14);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.20);
+      border-color: rgba(255,255,255,.35);
+    }
+
+    .btn.primary{
+      background: rgba(0,0,0,.18);
+      border-color: rgba(255,255,255,.30);
+    }
+
+    .hint{
+      margin-top: 14px;
+      font-size: .92rem;
+      color: rgba(255,255,255,.68);
+    }
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -120px -160px auto auto;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%);
+  transform: rotate(12deg);
+  pointer-events: none;
+  opacity: .55;
+}
+
+.developer-footer {
+  text-align: center;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.developer-footer:hover {
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  border-top-color: rgba(255, 255, 255, 0.3);
+}
+
+.developer-footer p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-bottom: 60px;
+}
+  </style>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Icons/youtube (1).png') }}">
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" role="status" aria-live="polite">
+      <div class="badge">Security Notice • Credentials required</div>
+
+      <h1 class="shine">Please remember your Username &amp; Password</h1>
+
+      <p>
+        For your account’s safety, credentials can’t be displayed here. If you forgot your password,
+        use the reset option on the login page.
+      </p>
+
+      <div class="actions">
+        <!-- Update these href values to match your routes/files -->
+        <a class="btn primary" href="{{ url_for('login') }}">Back to Login</a>
+        <a class="btn" href="{{ url_for('signup') }}">Create Account</a>
+        <a class="btn" href="{{ url_for('forget') }}">Forgot Password</a>
+      </div>
+
+      
+      <div class="hint">
+        Tip: Use a password manager and avoid reusing passwords across sites.
+      </div>
+    </section>
+  </main>
+    <footer class="developer-footer">
+  <p>Developer: Sudais Ali Shah</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Python compilation caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyInstaller / PyArmor build distributions
+build/
+dist/
+.pyarmor/
+
+# Large media files
+*.mp4
+*.mkv
+*.avi
+*.mov
+
+# Virtual environments
+venv/
+.venv/
+env/

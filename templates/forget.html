@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forgot password</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.3-dist/css/bootstrap.min.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Icons/youtube (1).png') }}">
+
+  <style>
+    .auth-bg{
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 700px at 15% 25%, rgba(220, 235, 255, .9), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 35%, rgba(255, 230, 245, .8), rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #f6f8fb, #ffffff);
+    }
+    .auth-wrap{ min-height: 100vh; display: grid; place-items: center; padding: 2.5rem 1rem; }
+    .auth-card{
+      width: 100%; max-width: 420px; background: #fff;
+      border: 1px solid rgba(0,0,0,.08); border-radius: 8px; padding: 28px 28px 24px;
+    }
+    .brand-title{ font-weight: 600; letter-spacing: .2px; }
+    .muted-small{ color: rgba(0,0,0,.6); font-size: .95rem; }
+.developer-footer {
+  text-align: center;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 1px solid #dee2e6;
+  color: #606060;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.developer-footer:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  color: #030303;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.developer-footer p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-bottom: 50px;
+  margin: 0;
+}
+  </style>
+</head>
+
+<body class="auth-bg">
+  <main class="container auth-wrap">
+    <div class="auth-card shadow-sm">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <img src="{{ url_for('static', filename='Icons/youtube (1).png') }}"
+             alt="YouTube" width="22" height="22" class="flex-shrink-0">
+        <div class="brand-title">YouTube</div>
+      </div>
+
+      <h1 class="h4 mb-1">Forgot password</h1>
+      <p class="muted-small mb-4">
+        Enter your email address and a reset link will be sent if the account exists.
+      </p>
+
+      {% if msg %}
+        <div class="alert alert-success mb-3" role="alert">{{ msg }}</div>
+      {% endif %}
+      {% if error %}
+        <div class="alert alert-danger mb-3" role="alert">{{ error }}</div>
+      {% endif %}
+
+      <form id="forgotForm" method="POST" action="{{ url_for('forget') }}" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control" id="email" name="email" type="email"
+                 autocomplete="email" placeholder="name@example.com" required>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit" id="submitBtn">
+          Send OTP
+        </button>
+
+        <div class="d-flex justify-content-between mt-3 small">
+          <a href="{{ url_for('login') }}" class="link-primary">Back to sign in</a>
+          <a href="{{ url_for('signup') }}" class="link-secondary">Create account</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center text-muted small mt-3">
+      © <span id="year"></span> YouTube
+    </div>
+  </main>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+
+    $("#year").textContent = new Date().getFullYear();
+
+    const form = $("#forgotForm");
+    const submitBtn = $("#submitBtn");
+
+    form.addEventListener("submit", (e) => {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+    });
+  </script>
+    <footer class="developer-footer">
+  <p>Developer: Sudais Ali Shah</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in</title>
+
+  <!-- Bootstrap (local in /static) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.3-dist/css/bootstrap.min.css') }}">
+
+  <!-- Custom CSS (local in /static) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='Log In/login.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Icons/youtube (1).png') }}">
+  <style>
+.developer-footer {
+  text-align: center;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 1px solid #dee2e6;
+  color: #606060;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.developer-footer:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  color: #030303;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.developer-footer p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-bottom: 50px;
+  margin: 0;
+}
+  </style>
+</head>
+
+<body class="auth-bg">
+  <main class="container auth-wrap">
+    <div class="auth-card shadow-sm">
+      <div class="d-flex align-items-center gap-2 mb-3">
+  <img
+    src="{{ url_for('static', filename='Icons/youtube (1).png') }}"
+    alt="YouTube"
+    width="22"
+    height="22"
+    class="flex-shrink-0"
+  >
+  <div class="brand-title">YouTube</div>
+</div>
+
+
+      <h1 class="h4 mb-1">Sign in</h1>
+      <p class="text-muted mb-4">Use your email and password to continue.</p>
+
+{% if error %}
+  <div class="alert alert-danger py-2" role="alert">{{ error }}</div>
+{% endif %}
+
+
+      <form id="loginForm" method="POST" action="{{ url_for('login') }}" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control" id="email" name="email" type="email"
+                 autocomplete="email" placeholder="name@example.com" required>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-group">
+            <input class="form-control" id="password" name="password" type="password"
+                   autocomplete="current-password" required minlength="1">
+            <button class="btn btn-outline-secondary" type="button" id="togglePw">Show</button>
+            <div class="invalid-feedback">Please enter your password.</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember">
+            <label class="form-check-label" for="remember">Keep me signed in</label>
+          </div>
+
+          <!-- Local HTML -> Flask endpoint -->
+          <a href="{{ url_for('forget') }}" class="link-primary small">Forgot password?</a>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit" id="submitBtn">
+          Sign in
+        </button>
+
+        <div class="d-flex justify-content-between mt-3 small">
+          <!-- Local HTML -> Flask endpoint -->
+          <a href="{{ url_for('error') }}" class="link-secondary">Can’t access your account?</a>
+
+          <!-- Local HTML -> Flask endpoint -->
+          <a href="{{ url_for('signup') }}" class="link-primary">Create one</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center text-muted small mt-3">
+      © <span id="year"></span> YouTube
+    </div>
+  </main>
+
+  <!-- Local JS (in /static) -->
+  <script src="{{ url_for('static', filename='Log In/login.js') }}"></script>
+    <footer class="developer-footer">
+  <p>Developer: Sudais Ali Shah</p>
+</footer>
+</body>
+</html>
